@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddMovieRequest;
 use App\Models\Movie;
+use App\Models\Theater;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all();
+        $theaters = Theater::all();
 
-        return view('movie.index', compact('movies'));
+        return view('movie.index', compact('theaters'));
     }
 
     public function fetch()
     {
-        $movies = Movie::all();
+        $movies = Movie::with('theater')->get();
+
         return response()->json($movies);
     }
 
