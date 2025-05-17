@@ -2,33 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddMovieRequest;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $movies = Movie::all();
+
+        return view('movie.index', compact('movies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function fetch()
     {
-        //
+        $movies = Movie::all();
+        return response()->json($movies);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(AddMovieRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $movie = Movie::create($data);
+
+        return response()->json($movie);
     }
 
     /**
