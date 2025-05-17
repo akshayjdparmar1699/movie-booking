@@ -2,7 +2,7 @@
     <h4 class="mb-4">Business Demo</h4>
     <ul class="nav nav-pills flex-column">
         <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white">Movies</a>
+            <a href="{{ route('movies.index') }}" class="nav-link text-white">Movies</a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link text-white"></a>
