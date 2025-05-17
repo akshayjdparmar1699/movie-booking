@@ -12,7 +12,10 @@ return new class extends Migration {
     {
         Schema::create('theaters', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name');
+            $table->tinyInteger('is_active')->default(1)->comment('0=>Inactive,1=>Active');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
