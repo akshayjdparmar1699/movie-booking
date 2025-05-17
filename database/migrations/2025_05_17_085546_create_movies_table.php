@@ -12,8 +12,10 @@ return new class extends Migration {
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('theater_id');
             $table->string('name', 50);
             $table->string('director_name', 50);
+            $table->tinyInteger('is_active')->default(1)->comment('0=>Inactive,1=>Active');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });
