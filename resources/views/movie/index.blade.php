@@ -17,6 +17,16 @@
                     <div class="modal-body">
                         <form id="addMovieForm">
                             <div class="mb-3">
+                                <label for="theater_name" class="col-form-label">Theater Name</label>
+                                <select class="form-select" name="theater_id" aria-label="Default select example">
+                                    <option selected>Select Theater</option>
+                                    @foreach ($theaters as $theater)
+                                        <option value="{{ $theater->id }}">{{ $theater->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="text-danger error-theater_id"></div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="name" class="col-form-label">Name</label>
                                 <input type="text" class="form-control" name="name" id="name">
                                 <div class="text-danger error-name"></div>
@@ -40,9 +50,11 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Theater Name</th>
                     <th scope="col">Name</th>
                     <th scope="col">Director Name</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Created At</th>
                 </tr>
             </thead>
             <tbody id="movie-table-tr">
@@ -68,9 +80,11 @@
                         $('#movie-table-tr').append(`
 <tr>
                     <th scope="row">${movie.id}</th>
+                    <td>${movie.theater.name}</td>
                     <td>${movie.name}</td>
                     <td>${movie.director_name}</td>
-                    <td>-</td>
+                    <td>${movie.is_active ? 'Active' : 'Inactive'}</td>
+                    <td>${movie.created_at}</td>
                 </tr>
                         `)
                     });
@@ -107,6 +121,9 @@
                 error: function(xhr) {
                     if (xhr.status === 422) {
                         let errors = xhr.responseJSON.errors;
+                        if (errors.theater_id) {
+                            $('.error-theater_id').text(errors.theater_id[0]);
+                        }
                         if (errors.name) {
                             $('.error-name').text(errors.name[0]);
                         }

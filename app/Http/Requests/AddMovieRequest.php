@@ -15,7 +15,8 @@ class AddMovieRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'director_name' => ['required', 'string']
+            'director_name' => ['required', 'string'],
+            'theater_id' => ['required']
         ];
     }
 }
