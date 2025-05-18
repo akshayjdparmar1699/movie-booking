@@ -7,5 +7,8 @@
         <li class="nav-item mb-2">
             <a href="{{ route('movies.index') }}" class="nav-link text-white">Movies</a>
         </li>
+        <li class="nav-item mb-2">
+            <a href="{{ route('screens.index') }}" class="nav-link text-white">Screens</a>
+        </li>
     </ul>
 </div>
