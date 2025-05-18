@@ -26,15 +26,34 @@
                                 </select>
                                 <div class="text-danger error-theater_id"></div>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="screen_name" class="col-form-label">Screen Name</label>
+                                <select class="form-select" name="screen_id" aria-label="Default select example">
+                                    <option selected>Select Screen</option>
+                                    @foreach ($screens as $screen)
+                                        <option value="{{ $screen->id }}">{{ $screen->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="text-danger error-screen_id"></div>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="name" class="col-form-label">Name</label>
                                 <input type="text" class="form-control" name="name" id="name">
                                 <div class="text-danger error-name"></div>
                             </div>
+
                             <div class="mb-3">
                                 <label for="director_name" class="col-form-label">Director Name</label>
                                 <input type="text" class="form-control" name="director_name" id="director_name">
                                 <div class="text-danger error-director_name"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="image" class="col-form-label">Upload Image</label>
+                                <input type="file" class="form-control" id="image" name="image">
+                                <div class="text-danger error-image"></div>
                             </div>
                         </form>
                     </div>
@@ -53,8 +72,10 @@
                     <th scope="col">Theater Name</th>
                     <th scope="col">Name</th>
                     <th scope="col">Director Name</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Status</th>
                     <th scope="col">Created At</th>
+                    <th scope="col">Booking Movie</th>
                 </tr>
             </thead>
             <tbody id="movie-table-tr">
@@ -83,8 +104,12 @@
                     <td>${movie.theater.name}</td>
                     <td>${movie.name}</td>
                     <td>${movie.director_name}</td>
+                    <td><img src="{{ asset('storage/images/movie-image/${movie.image}') }}" alt="${movie.name}" style="max-width: 100px; height: auto;"></td>
                     <td>${movie.is_active ? 'Active' : 'Inactive'}</td>
                     <td>${movie.created_at}</td>
+                    <td>
+        <a href="/booking/${movie.id}/${movie.screen.id}" class="btn btn-primary">Book Seat</a>
+    </td>
                 </tr>
                         `)
                     });
@@ -129,6 +154,12 @@
                         }
                         if (errors.director_name) {
                             $('.error-director_name').text(errors.director_name[0]);
+                        }
+                        if (errors.image) {
+                            $('.error-image').text(errors.image[0]);
+                        }
+                        if (errors.screen_id) {
+                            $('.error-screen_id').text(errors.screen_id[0]);
                         }
                     } else {
                         alert('Something went wrong. Please try again.');

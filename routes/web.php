@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ScreenController;
 use App\Http\Controllers\TheaterController;
@@ -18,3 +19,7 @@ Route::resource('/theaters', TheaterController::class);
 //Screens
 Route::get('screens/fetch', [ScreenController::class, 'fetch'])->name('screens.fetch');
 Route::resource('/screens', ScreenController::class);
+
+//Booking
+Route::get('/booking/{movieId}/{screenId}', [BookingController::class, 'show'])->name('booking.show');
+Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');

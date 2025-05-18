@@ -12,4 +12,9 @@ class Movie extends Model
     {
         return $this->belongsTo(Theater::class);
     }
+
+    public function screen()
+    {
+        return $this->belongsTo(Screen::class);
+    }
 }

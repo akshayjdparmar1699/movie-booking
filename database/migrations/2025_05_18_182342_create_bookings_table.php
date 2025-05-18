@@ -10,14 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('theater_id');
+            $table->unsignedBigInteger('movie_id');
             $table->unsignedBigInteger('screen_id');
-            $table->string('name', 50);
-            $table->string('director_name', 50);
-            $table->string('image');
-            $table->tinyInteger('is_active')->default(1)->comment('0=>Inactive,1=>Active');
+            $table->date('booking_date');
+            $table->json('seats');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });
@@ -28,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('bookings');
     }
 };

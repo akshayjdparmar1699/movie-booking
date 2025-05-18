@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddMovieRequest;
 use App\Models\Movie;
+use App\Models\Screen;
 use App\Models\Theater;
 use Illuminate\Http\Request;
 
@@ -12,20 +13,28 @@ class MovieController extends Controller
     public function index()
     {
         $theaters = Theater::all();
+        $screens = Screen::all();
 
-        return view('movie.index', compact('theaters'));
+        return view('movie.index', compact('theaters', 'screens'));
     }
 
     public function fetch()
     {
-        $movies = Movie::with('theater')->get();
-
+        $movies = Movie::with('theater', 'screen')->get();
         return response()->json($movies);
     }
 
     public function store(AddMovieRequest $request)
     {
         $data = $request->validated();
+
+        $image = $request->file('image');
+
+        $fileName = time() . 'image.' . $image->getClientOriginalExtension();
+
+        $image->storeAs('images/movie-image', $fileName);
+
+        $data['image'] = $fileName;
 
         $movie = Movie::create($data);
 

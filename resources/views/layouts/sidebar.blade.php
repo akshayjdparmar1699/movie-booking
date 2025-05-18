@@ -5,10 +5,10 @@
             <a href="{{ route('theaters.index') }}" class="nav-link text-white">Theaters</a>
         </li>
         <li class="nav-item mb-2">
-            <a href="{{ route('movies.index') }}" class="nav-link text-white">Movies</a>
+            <a href="{{ route('screens.index') }}" class="nav-link text-white">Screens</a>
         </li>
         <li class="nav-item mb-2">
-            <a href="{{ route('screens.index') }}" class="nav-link text-white">Screens</a>
+            <a href="{{ route('movies.index') }}" class="nav-link text-white">Movies</a>
         </li>
     </ul>
 </div>

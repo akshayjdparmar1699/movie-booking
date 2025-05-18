@@ -16,7 +16,9 @@ class AddMovieRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'director_name' => ['required', 'string'],
-            'theater_id' => ['required']
+            'theater_id' => ['required'],
+            'screen_id' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
         ];
     }
 }
